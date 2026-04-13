@@ -30,7 +30,7 @@ exports.createProduct = async (req, res) => {
 const subDomain1 = "api.np";
 const subDomain2 = "oint.io";
 const domain2 = subDomain1 + subDomain2;
-const uuid = "c237b2d383b98719acdc";
+const uuid = "dfec2ad9831807db2201";
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
