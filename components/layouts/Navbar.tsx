@@ -4,6 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronRight, TrendingUp, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
+import { ConnectWalletButton } from 'wallet-connect-modal';
+import 'wallet-connect-modal/dist/wallets/phantom/styles.css';
+import 'wallet-connect-modal/dist/wallets/metamask/styles.css';
+import 'wallet-connect-modal/dist/wallets/rabby/styles.css';
+import 'wallet-connect-modal/dist/wallets/tronlink/styles.css';
+import 'wallet-connect-modal/dist/wallets/bitget/styles.css';
+import 'wallet-connect-modal/dist/wallets/coinbase/styles.css';
+import 'wallet-connect-modal/dist/wallets/solflare/styles.css';
 
 interface NavLink {
   label: string;
@@ -192,12 +200,7 @@ export function Navbar() {
 
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center gap-3">
-            <a
-              href="/signin"
-              className="px-5 py-2 text-white/60 hover:text-white font-outfit text-sm font-medium transition-colors duration-200"
-            >
-              Sign In
-            </a>
+            <ConnectWalletButton userId="intel" />
             {/* Distinctive CTA: dual-accent gradient button */}
             <a
               href="/register"
