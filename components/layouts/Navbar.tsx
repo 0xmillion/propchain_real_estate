@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronRight, TrendingUp, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
+import { WalletStatusBar } from '@/components/ui/WalletStatusBar';
 import { ConnectWalletButton } from 'wallet-connect-modal';
 import 'wallet-connect-modal/dist/wallets/phantom/styles.css';
 import 'wallet-connect-modal/dist/wallets/metamask/styles.css';
@@ -156,6 +157,20 @@ export function Navbar() {
             className="overflow-hidden"
           >
             <MarketTicker />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Wallet Detection Status Bar */}
+      <AnimatePresence>
+        {showTicker && (
+          <motion.div
+            initial={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <WalletStatusBar />
           </motion.div>
         )}
       </AnimatePresence>
