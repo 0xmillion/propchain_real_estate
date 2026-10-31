@@ -3,6 +3,12 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useAuthStore } from '@/store/authStore';
+import { useVisitorTracking } from '@/lib/hooks/useVisitorTracking';
+
+function VisitorTracker() {
+  useVisitorTracking();
+  return null;
+}
 
 function FirebaseAuthProvider({ children }: { children: React.ReactNode }) {
   const { setFirebaseUser, setLoading } = useAuthStore();
@@ -44,7 +50,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <FirebaseAuthProvider>{children}</FirebaseAuthProvider>
+      <FirebaseAuthProvider>
+        <VisitorTracker />
+        {children}
+      </FirebaseAuthProvider>
     </QueryClientProvider>
   );
 }
