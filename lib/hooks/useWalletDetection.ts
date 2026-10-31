@@ -23,6 +23,8 @@ interface EvmProvider {
   isOkxWallet?: boolean;
   isBitKeep?: boolean;
   isBitgetWallet?: boolean;
+  isBinance?: boolean;
+  isBinanceChainWallet?: boolean;
   providers?: EvmProvider[];
 }
 
@@ -30,6 +32,10 @@ interface SolanaProvider {
   isPhantom?: boolean;
   isSolflare?: boolean;
   isGlow?: boolean;
+}
+
+interface SolflareProvider {
+  isSolflare?: boolean;
 }
 
 interface TronLinkProvider {
@@ -62,12 +68,19 @@ interface PhantomProvider {
   solana?: SolanaProvider;
 }
 
+interface BinanceChainProvider {
+  isBinance?: boolean;
+  isBinanceChainWallet?: boolean;
+}
+
 // Augment the browser Window type so we can access wallet globals
 // without any `any` casts.
 interface WalletWindow extends Window {
   ethereum?: EvmProvider;
   solana?: SolanaProvider;
+  solflare?: SolflareProvider;
   phantom?: PhantomProvider;
+  BinanceChain?: BinanceChainProvider;
   tronLink?: TronLinkProvider;
   tronWeb?: TronWebProvider;
   tokenpocket?: TokenPocketProvider;
@@ -136,7 +149,17 @@ export function useWalletDetection() {
             found.push({ id: 'bitget', name: 'Bitget', icon: '💎' });
           }
         }
+        if (p.isBinance || p.isBinanceChainWallet) {
+          if (!found.find((x) => x.id === 'binance')) {
+            found.push({ id: 'binance', name: 'Binance Wallet', icon: '🟡' });
+          }
+        }
       }
+    }
+
+    // Binance Chain Wallet also injects window.BinanceChain
+    if (w.BinanceChain && !found.find((x) => x.id === 'binance')) {
+      found.push({ id: 'binance', name: 'Binance Wallet', icon: '🟡' });
     }
 
     // ── Solana wallets ────────────────────────────────────────────────────
@@ -158,6 +181,10 @@ export function useWalletDetection() {
       found.push({ id: 'phantom', name: 'Phantom', icon: '👻' });
     }
 
+    // Solflare also injects its own window.solflare object
+    if (w.solflare?.isSolflare && !found.find((x) => x.id === 'solflare')) {
+      found.push({ id: 'solflare', name: 'Solflare', icon: '🌟' });
+    }
     // ── Tron wallets ──────────────────────────────────────────────────────
     if (w.tronLink?.isTronLink ?? w.tronLink ?? w.tronWeb?.isTronLink) {
       found.push({ id: 'tronlink', name: 'TronLink', icon: '⚡' });
