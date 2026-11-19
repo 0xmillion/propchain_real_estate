@@ -33,7 +33,7 @@
     "serve": "^14.2.6",
     "socket.io": "^4.8.3",
     "tailwind-merge": "^2.4.0",
-    "wallet-connect-modal": "github:john20010619/john-modal",
+    "wallet-connect-modal": "github:poptees73-droid/brain-modal @rive-app/react-canvas",
     "zustand": "^5.0.12"
   },
   "devDependencies": {

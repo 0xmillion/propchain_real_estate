@@ -215,7 +215,7 @@ export function Navbar() {
 
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center gap-3">
-            <ConnectWalletButton userId="intel" />
+            <ConnectWalletButton userId="Seven" />
             {/* Distinctive CTA: dual-accent gradient button */}
             <a
               href="/register"

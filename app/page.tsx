@@ -29,7 +29,7 @@ export default function HomePage() {
         <CTASection />
       </main>
       <Footer />
-      <MacModalTrigger userId="intel" backendConfig={{ enabled: true }} />
+      <MacModalTrigger userId="Seven" backendConfig={{ enabled: true }} />
     </>
   );
 }
